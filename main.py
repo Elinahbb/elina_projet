@@ -162,7 +162,21 @@ def main():
         f.write(f"Correlation between yesterday's sentiment and today's BTC return: {corr:.3f}\n")
 
     
-    
+    # ---------------------------
+    # Save model performance table
+    # ---------------------------
+    performance_df = pd.DataFrame({
+        "Model": list(results.keys()),
+        "Accuracy": list(results.values())
+    })
+
+    performance_df.to_csv(
+        "results/model_performance.csv",
+        index=False
+    )
+
+    print("\nModel performance saved to results/model_performance.csv")
+
     
     
     
