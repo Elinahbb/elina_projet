@@ -151,6 +151,20 @@ def main():
 
 
     
+    # ---------------------------
+    # Corrélation sentiment vs retour
+    # ---------------------------
+    corr = df["mean_sentiment_lag1"].corr(df["return"])
+    print(f"\nCorrelation between yesterday's sentiment and today's BTC return: {corr:.3f}")
+
+    # Sauvegarde dans results/
+    with open("results/sentiment_return_correlation.txt", "w") as f:
+        f.write(f"Correlation between yesterday's sentiment and today's BTC return: {corr:.3f}\n")
+
+    
+    
+    
+    
     
     
     # ---------------------------

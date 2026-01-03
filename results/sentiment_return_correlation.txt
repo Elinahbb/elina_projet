@@ -1,0 +1,1 @@
+Correlation between yesterday's sentiment and today's BTC return: 0.025
