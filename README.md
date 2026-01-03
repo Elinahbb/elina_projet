@@ -28,24 +28,24 @@ Expected output:
 
 ```text
 elina_projet/
-├── README.md              # Setup, usage, project overview
-├── PROPOSAL.md            # Project proposal (300–500 words)
-├── project_report.pdf     # Final technical report (PDF)
+├── README.md              # Setup and usage instructions
+├── PROPOSAL.md            # Project proposal
+├── project_report.pdf     # Final project report (PDF)
 ├── environment.yml        # Conda dependencies
-├── main.py                # Entry point (python main.py)
-├── src/
+├── main.py                # Main entry point
+├── src/                   # Source code
 │   ├── data_loader.py     # Data loading & preprocessing
-│   ├── models.py          # Model definitions
-│   └── evaluation.py     # Evaluation & metrics
+│   ├── models.py          # Model training
+│   └── evaluation.py      # Evaluation metrics
 ├── data/
 │   └── raw/
 │       ├── BTC.csv
 │       └── bitcoin_sentiments_21_24.csv
-├── results/
+├── results/               # Output figures & metrics
 │   ├── sentiment_distribution.png
 │   ├── sentiment_vs_return.png
 │   └── rolling_sentiment_return.png
-└── notebooks/
+└── notebooks/             # Optional exploration notebooks
     └── test.ipynb
 ```
 
