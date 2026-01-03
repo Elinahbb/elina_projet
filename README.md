@@ -26,26 +26,28 @@ Expected output:
 
 ## Project Structure
 
+```text
 elina_projet/
 ├── README.md              # Setup, usage, project overview
 ├── PROPOSAL.md            # Project proposal (300–500 words)
 ├── project_report.pdf     # Final technical report (PDF)
 ├── environment.yml        # Conda dependencies
 ├── main.py                # Entry point (python main.py)
-├── src/                   # Source code
+├── src/
 │   ├── data_loader.py     # Data loading & preprocessing
 │   ├── models.py          # Model definitions
-│   └── evaluation.py      # Evaluation & metrics
+│   └── evaluation.py     # Evaluation & metrics
 ├── data/
 │   └── raw/
 │       ├── BTC.csv
 │       └── bitcoin_sentiments_21_24.csv
-├── results/               # Output figures & metrics
+├── results/
 │   ├── sentiment_distribution.png
 │   ├── sentiment_vs_return.png
 │   └── rolling_sentiment_return.png
-└── notebooks/             # Optional exploration notebooks
+└── notebooks/
     └── test.ipynb
+```
 
 
 ## Results
