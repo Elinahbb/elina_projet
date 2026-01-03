@@ -22,7 +22,8 @@ This project is motivated by the growing importance of sentiment analysis in fin
 4. Evaluate models using accuracy and classification metrics.  
 5. Generate visualizations: sentiment distribution, sentiment vs return scatter plot, and 7-day rolling averages.  
 
-## Technologies: Python 3.11+, pandas, scikit-learn, matplotlib, seaborn, JupyterLab.
+## Technologies:
+Python 3.11+, pandas, scikit-learn, matplotlib, seaborn, JupyterLab.
 
 ## Expected Challenges:
 - Low signal-to-noise ratio: financial markets are highly volatile, and news sentiment may have only a weak effect.  
