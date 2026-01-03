@@ -6,8 +6,11 @@ Can Bitcoin news sentiment help predict the next-day direction of Bitcoin prices
 ## Setup
 
 # Create environment
+
 cd elina_projet
+
 conda env create -f environment.yml
+
 conda activate elina-projet
 
 ## Usage
