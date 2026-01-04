@@ -83,7 +83,7 @@ than complex modeling.
 \end{abstract}
 
 \vspace{0.5cm}
-\noindent\textbf{Keywords:} data science, Python, machine learning, [add your keywords]
+\noindent\textbf{Keywords:} data science, Python, machine learning, Bitcoin, sentiment analysis, financial prediction, time series
 
 \newpage
 \tableofcontents
@@ -143,26 +143,16 @@ Model evaluation is handled by the \texttt{evaluation.py} module. This component
 
 
 Example code snippet:
-\begin{lstlisting}[caption={Example data preprocessing function}]
-def preprocess_data(df):
-    """
-    Preprocess the input dataframe.
-    
-    Args:
-        df: Input pandas DataFrame
-    
-    Returns:
-        Preprocessed DataFrame
-    """
-    # Remove missing values
-    df = df.dropna()
-    
-    # Normalize numerical features
-    scaler = StandardScaler()
-    df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
-    
-    return df
+
+\begin{lstlisting}[caption={Construction of lagged features}]
+# Use yesterday's return and sentiment to predict today's price movement
+df["return_lag1"] = df["return"].shift(1)
+df["mean_sentiment_lag1"] = df["mean_sentiment"].shift(1)
+
+# Remove the first observation where lagged values are unavailable
+df = df.dropna()
 \end{lstlisting}
+
 
 \section{Results}
 \label{sec:results}
@@ -207,14 +197,29 @@ A scatter plot comparing yesterday’s sentiment to today’s Bitcoin return rev
 
 Finally, rolling averages of sentiment and returns are plotted using a seven-day window. These smoothed series provide a clearer view of medium-term trends and suggest occasional co-movements between sentiment and returns, though such patterns are not persistent over time.
 
-Include relevant plots and figures. For example:
+As an exploratory analysis, the correlation between lagged news sentiment and daily Bitcoin returns was also examined. The observed correlation (0.025) is weak and close to zero, indicating the absence of a strong linear relationship. This result is consistent with the visual dispersion observed in the sentiment–return scatter plot and further highlights the noisy nature of the relationship between news sentiment and short-term price movements.
 
 \begin{figure}[H]
 \centering
-% \includegraphics[width=0.8\textwidth]{figures/results_plot.png}
-\caption{Your results visualization}
-\label{fig:results}
+\includegraphics[width=0.75\textwidth]{results/sentiment_distribution.png}
+\caption{Distribution of daily aggregated news sentiment}
+\label{fig:sentiment_dist}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{results/sentiment_vs_return.png}
+\caption{Relationship between lagged sentiment and daily Bitcoin returns}
+\label{fig:sentiment_return}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{results/rolling_sentiment_return.png}
+\caption{Seven-day rolling averages of sentiment and Bitcoin returns}
+\label{fig:rolling}
+\end{figure}
+
 
 \section{Discussion}
 \label{sec:discussion}
@@ -265,7 +270,19 @@ Include supplementary figures or tables that support but aren't essential to the
 \noindent
 \textbf{GitHub Repository:} \url{https://github.com/Elinahbb/elina_projet.git}
 
+A VERIFIER
+The repository is organized as follows:
+\begin{itemize}
+    \item \texttt{data\_loader.py}: data loading and preprocessing
+    \item \texttt{models.py}: model definitions and training
+    \item \texttt{evaluation.py}: performance metrics and evaluation
+    \item \texttt{main.py}: execution pipeline and result generation
+\end{itemize}
 
+All experiments can be reproduced by running the \texttt{main.py} script after installing the required dependencies.
+
+
+PROF :
 \noindent
 Provide information about:
 \begin{itemize}
@@ -275,11 +292,3 @@ Provide information about:
 \end{itemize}
 
 \end{document}
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.75\textwidth]{results/sentiment_distribution.png}
-\caption{Distribution of daily aggregated news sentiment}
-\label{fig:sentiment_dist}
-\end{figure}
