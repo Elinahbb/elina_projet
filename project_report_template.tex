@@ -58,14 +58,14 @@
 \title{%
     \Large \textbf{Advanced Programming 2025} \\
     \vspace{0.5cm}
-    \LARGE \textbf{Your Project Title Here} \\
+    \LARGE \textbf{Predicting Bitcoin Price Direction Using News Sentiment} \\
     \vspace{0.3cm}
     \large Final Project Report
 }
 \author{
-    Your Name \\
-    \texttt{your.email@unil.ch} \\
-    Student ID: 12345678
+    Habib Elina \\
+    \texttt{elina.habib@unil.ch} \\
+    Student ID: 22427009
 }
 \date{\today}
 
@@ -76,13 +76,10 @@
 
 \begin{abstract}
 \noindent
-Provide a concise summary (150-200 words) of your project. Include:
-\begin{itemize}
-    \item The problem you're solving
-    \item Your approach/methodology
-    \item Key results/findings
-    \item Main contributions
-\end{itemize}
+
+This project investigates whether news sentiment can be used to predict the daily direction of Bitcoin prices. Given the high volatility of cryptocurrencies and their sensitivity to public information, the objective is to assess whether sentiment extracted from news articles contains useful predictive signals. The problem is formulated as a binary classification task, where the goal is to predict whether the Bitcoin price increases or decreases from one day to the next. Daily Bitcoin price data is combined with sentiment scores aggregated from news articles. To avoid look-ahead bias, only information available at time $t-1$ (previous day’s return and sentiment) is used as input features. Several machine learning models are trained, including Logistic Regression, Random Forest, and K-Nearest Neighbors. The performance of the models is evaluated using classification accuracy and compared to a naive baseline strategy that always predicts an upward price movement. The results show that the machine learning models slightly outperform the baseline, suggesting that news sentiment provides limited but non-negligible information. Overall, the findings highlight the difficulty of predicting Bitcoin price movements and suggest that, while news sentiment may contribute marginally, it is not sufficient on its own to achieve high predictive accuracy. The project emphasizes methodological rigor and reproducibility rather
+than complex modeling.
+
 \end{abstract}
 
 \vspace{0.5cm}
@@ -97,52 +94,53 @@ Provide a concise summary (150-200 words) of your project. Include:
 \section{Introduction}
 \label{sec:introduction}
 
-Introduce your project and its context. This section should include:
-\begin{itemize}
-    \item Background and motivation
-    \item Problem statement
-    \item Objectives and goals
-    \item Report organization
-\end{itemize}
+Bitcoin is one of the most prominent cryptocurrencies and is well known for its high volatility. Understanding and predicting its price movements is of interest to investors, researchers, and market participants. Unlike traditional financial assets, Bitcoin prices are influenced not only by market fundamentals but also by public attention, media coverage, and investor sentiment.
+
+With the increasing availability of textual data, news articles have become a popular source for measuring market sentiment. Several studies suggest that sentiment extracted from news may affect short-term price movements, particularly in speculative markets such as cryptocurrencies. This raises the question of
+whether news sentiment can be used as a predictive signal for Bitcoin price direction.
+
+The objective of this project is to assess the predictive value of daily news sentiment for Bitcoin price movements using machine learning methods. Rather than aiming for high trading performance, the goal is to build a clear and reproducible framework that combines financial time-series data with sentiment indicators and evaluates their usefulness relative to simple benchmark strategies.
+
+The remainder of this report is organized as follows. Section 2 reviews related work. Section 3 describes the data and methodology. Section 4 presents the empirical results, which are discussed in Section 5. Section 6 concludes and suggests possible extensions.
 
 \section{Literature Review / Related Work}
 \label{sec:literature}
 
-Discuss relevant prior work, existing solutions, or theoretical background. For data science projects, this might include:
-\begin{itemize}
-    \item Previous approaches to similar problems
-    \item Relevant algorithms or methodologies
-    \item Datasets used in related studies
-\end{itemize}
+A large body of literature studies the relationship between news sentiment and financial markets. Early work by Tetlock (2007) shows that pessimistic news coverage is associated with lower stock market returns. More recent research has extended sentiment analysis techniques to alternative assets, including cryptocurrencies.
+
+Several studies focus specifically on Bitcoin and other cryptocurrencies, using sentiment derived from news articles, social media platforms, or online forums. While some findings suggest that sentiment may contain predictive information, results are often mixed and depend on the time period, data source, and methodology used.
+
+Overall, existing research indicates that sentiment-based models rarely achieve strong predictive performance on their own. This project follows this line of research by applying standard machine learning models to sentiment and price data, with an emphasis on careful data handling and transparent evaluation.
+
 
 \section{Methodology}
 \label{sec:methodology}
 
 \subsection{Data Description}
-Describe your dataset(s):
-\begin{itemize}
-    \item Source and collection method
-    \item Size and characteristics
-    \item Features/variables
-    \item Data quality issues
-\end{itemize}
+
+This project uses two main datasets. The first dataset contains daily Bitcoin price information, including the closing price for each trading day. The second dataset consists of Bitcoin-related news articles, each associated with a numerical sentiment score obtained through sentiment analysis.
+
+Both datasets were sourced from Kaggle. Since sentiment data is only available from November 2021 onward, the analysis is restricted to the overlapping period between the two datasets. To align the data frequencies, news sentiment scores are aggregated at the daily level by computing the average sentiment across all articles published on the same day.
+
+Days without available news are assigned a neutral sentiment value. This choice allows the preservation of all trading days while avoiding the introduction of artificial bias.
 
 \subsection{Approach}
-Detail your technical approach:
-\begin{itemize}
-    \item Algorithms used
-    \item Data preprocessing steps
-    \item Model architecture (if applicable)
-    \item Evaluation metrics
-\end{itemize}
+The prediction task is formulated as a binary classification problem. The target variable takes the value one if the Bitcoin price increases compared to the previous day, and zero otherwise.
+
+To ensure a realistic prediction setting, only lagged information is used. Specifically, yesterday’s Bitcoin return and yesterday’s average news sentiment are used as explanatory variables for today’s price movement. This design choice prevents the use of future information and avoids look-ahead bias.
+
+Three classification models are considered: Logistic Regression, Random Forest, and K-Nearest Neighbors. Their performance is evaluated using classification accuracy and compared to a naive baseline strategy that always predicts an upward price movement. This baseline provides a simple benchmark to assess whether the
+machine learning models add predictive value.
 
 \subsection{Implementation}
-Discuss the implementation details:
-\begin{itemize}
-    \item Programming languages and libraries
-    \item System architecture
-    \item Key code components
-\end{itemize}
+The project is implemented entirely in Python, following a modular and reproducible structure. The codebase is organized into independent scripts, each responsible for a specific stage of the machine learning pipeline. This design choice improves readability, facilitates debugging, and allows individual components to be reused or extended if needed.
+
+Data loading and preprocessing are handled in a dedicated module (\texttt{dataloader.py}). This module is responsible for reading raw Bitcoin price data and news sentiment data from CSV files, aligning them at a daily frequency, and constructing the feature matrix and target variable. Particular care is taken to avoid look-ahead bias by relying exclusively on lagged information when building predictive features. Feature scaling is applied using standardization to ensure that all models operate on comparable numerical ranges.
+
+Model definitions and training procedures are implemented in the \texttt{models.py} module. Three supervised learning algorithms are considered: Logistic Regression, Random Forest, and K-Nearest Neighbors. These models were selected to represent a spectrum of complexity, ranging from linear to non-linear approaches. Each model is trained using the same input features to ensure a fair comparison.
+
+Model evaluation is handled by the \texttt{evaluation.py} module. This component computes standard classification metrics, including accuracy, precision, and recall, and outputs detailed performance reports. Finally, the \texttt{main.py} script orchestrates the entire workflow: data preparation, model training, evaluation, baseline comparison, and result visualization. All experiments are fully reproducible, and final outputs (tables and figures) are automatically saved for inclusion in the report.
+
 
 Example code snippet:
 \begin{lstlisting}[caption={Example data preprocessing function}]
@@ -169,17 +167,21 @@ def preprocess_data(df):
 \section{Results}
 \label{sec:results}
 
-Present your findings with appropriate visualizations and tables.
 
 \subsection{Experimental Setup}
-Describe your experimental environment:
-\begin{itemize}
-    \item Hardware specifications
-    \item Software versions
-    \item Hyperparameters
-\end{itemize}
+All experiments were conducted on a standard personal computer using Python 3. The main libraries used include \texttt{pandas} and \texttt{numpy} for data manipulation, \texttt{scikit-learn} for machine learning algorithms, and \texttt{matplotlib} and \texttt{seaborn} for data visualization.
+
+The dataset spans from November 2021 to 2024 and is split chronologically into training and testing sets, with 80\% of the data used for training and 20\% for testing. This time-based split is essential to avoid information leakage from future observations and to simulate a realistic prediction setting.
+
+Default or commonly used hyperparameters are employed for all models to avoid excessive tuning and maintain methodological transparency. Logistic Regression is trained with an increased maximum number of iterations to ensure convergence. The Random Forest model uses a limited tree depth to reduce overfitting, while the K-Nearest Neighbors model relies on a fixed number of neighbors.
 
 \subsection{Performance Evaluation}
+
+Model performance is assessed using accuracy, precision, and recall. Accuracy measures overall predictive correctness, while precision and recall provide additional insight into classification behavior, particularly for upward price movements.
+
+In addition to machine learning models, a naive baseline strategy is introduced. This baseline always predicts that the Bitcoin price will increase (this reflects the overall bullish tendency of Bitcoin). While simplistic, it provides a useful benchmark against which the added value of more sophisticated models can be evaluated.
+
+The results are summarized in Table~\ref{tab:performance}. Logistic Regression achieves the highest accuracy among the tested models, marginally outperforming Random Forest and KNN. All models show only modest improvements over the baseline, suggesting that the predictive signal contained in daily news sentiment is relatively weak.
 
 \begin{table}[H]
 \centering
@@ -189,13 +191,21 @@ Describe your experimental environment:
 \hline
 \textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\
 \hline
-Baseline & 0.75 & 0.72 & 0.78 \\
-Your Model & 0.85 & 0.83 & 0.87 \\
+Baseline (Always Up) & 0.51 & 0.51 & 1.00 \\
+Logistic Regression & 0.56 & 0.57 & 0.59 \\
+Random Forest & 0.55 & 0.56 & 0.55 \\
+KNN & 0.53 & 0.55 & 0.52 \\
 \hline
 \end{tabular}
 \end{table}
 
 \subsection{Visualizations}
+
+Several visualizations are produced to explore the relationship between news sentiment and Bitcoin returns. First, the distribution of lagged sentiment scores highlights that most daily sentiment values are close to neutral, with relatively few extreme observations. This concentration around zero may partially explain the limited predictive power observed in the models.
+
+A scatter plot comparing yesterday’s sentiment to today’s Bitcoin return reveals no strong linear relationship. While some positive sentiment days coincide with positive returns, the overall dispersion remains high, indicating substantial noise.
+
+Finally, rolling averages of sentiment and returns are plotted using a seven-day window. These smoothed series provide a clearer view of medium-term trends and suggest occasional co-movements between sentiment and returns, though such patterns are not persistent over time.
 
 Include relevant plots and figures. For example:
 
@@ -209,27 +219,22 @@ Include relevant plots and figures. For example:
 \section{Discussion}
 \label{sec:discussion}
 
-Analyze and interpret your results:
-\begin{itemize}
-    \item What worked well?
-    \item What were the challenges?
-    \item How do your results compare to expectations?
-    \item Limitations of your approach
-\end{itemize}
+The results indicate that incorporating news sentiment into short-term Bitcoin price direction prediction yields limited predictive improvements. Although machine learning models slightly outperform the naive baseline, their accuracy remains close to random guessing. This finding is consistent with the highly volatile and speculative nature of cryptocurrency markets.
+
+Several factors may contribute to this outcome. First, daily aggregation of sentiment may be too coarse to capture rapid market reactions to news. Second, Bitcoin prices are influenced by a wide range of factors beyond textual sentiment, including macroeconomic conditions, regulatory announcements, and market microstructure effects. Finally, the sentiment scores themselves may contain noise or measurement errors that dilute their usefulness.
+
+Despite these limitations, the inclusion of a baseline model plays a crucial role in contextualizing results. The fact that trained models outperform the baseline, albeit marginally, suggests that sentiment contains some information, but not enough to support strong predictive claims at a daily frequency.
 
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 
 \subsection{Summary}
-Summarize your key findings and contributions.
+This project investigated whether daily news sentiment can help predict the direction of Bitcoin price movements. Using a combination of financial price data and aggregated sentiment scores, several machine learning models were trained and evaluated under realistic forecasting conditions. While Logistic Regression achieved the best performance, all models exhibited limited predictive power and only slightly exceeded a naive baseline strategy.
+
+These findings suggest that, in isolation, daily news sentiment is insufficient for reliable short-term Bitcoin price prediction.
 
 \subsection{Future Directions}
-Suggest potential improvements or extensions:
-\begin{itemize}
-    \item Methodological improvements
-    \item Additional experiments
-    \item Real-world applications
-\end{itemize}
+Future work could explore several extensions. First, using higher-frequency data (e.g., hourly sentiment and returns) may better capture rapid market responses to news. Second, incorporating additional explanatory variables such as trading volume, volatility indicators, or macroeconomic signals could improve model performance. Finally, more advanced natural language processing techniques, such as transformer-based sentiment models, may yield richer representations of news content and enhance predictive accuracy.
 
 % ================== REFERENCES ==================
 \newpage
@@ -258,7 +263,8 @@ Include supplementary figures or tables that support but aren't essential to the
 \label{app:code}
 
 \noindent
-\textbf{GitHub Repository:} \url{https://github.com/yourusername/project-repo}
+\textbf{GitHub Repository:} \url{https://github.com/Elinahbb/elina_projet.git}
+
 
 \noindent
 Provide information about:
