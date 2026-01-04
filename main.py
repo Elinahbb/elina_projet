@@ -56,38 +56,63 @@ def main():
     results["Logistic Regression"] = evaluate_model(lr_model, X_test, y_test, "Logistic Regression")
     results["Random Forest"] = evaluate_model(rf_model, X_test, y_test, "Random Forest")
     results["KNN"] = evaluate_model(knn_model, X_test, y_test, "KNN")
-    
+
     
     # Display best model
     
-    best_model = max(results, key=results.get)
+    best_model = max(results, key=lambda m: results[m]["accuracy"])
 
     print("=" * 60)
-    print(f"Best model: {best_model} ({results[best_model]:.3f})")
+    print(
+        f"Best model: {best_model} "
+        f"(Accuracy = {results[best_model]['accuracy']:.3f})"
+    )
     print("=" * 60)
 
     
     # Baseline model (naive strategy) : always predict that Bitcoin price goes up.
     # This naive benchmark helps assess whether machine learning models provide real predictive value.
     
+    # Always predict class = 1 (price goes up)
+    baseline_pred = pd.Series(1, index=y_test.index)
+
+    # Accuracy: proportion of actual upward movements
     baseline_acc = (y_test == 1).mean()
 
+    # Precision: among predicted "up", proportion of correct predictions
+    baseline_precision = (y_test == 1).sum() / len(y_test)
+
+    # Recall: all actual upward movements are predicted as up
+    baseline_recall = 1.0
+    
     print("\nBaseline Model")
     print("-" * 40)
-    print(f"Accuracy (always predict up): {baseline_acc:.3f}")
-    results["Baseline (Always Up)"] = baseline_acc
+    print(f"Accuracy : {baseline_acc:.3f}")
+    print(f"Precision: {baseline_precision:.3f}")
+    print(f"Recall   : {baseline_recall:.3f}")
+
+    results["Baseline (Always Up)"] = {
+        "accuracy": baseline_acc,
+        "precision": baseline_precision,
+        "recall": baseline_recall
+    }
     
     
     # Save model performance
     
-    performance_df = pd.DataFrame({
-        "Model": list(results.keys()),
-        "Accuracy": list(results.values())
-    })
-
+    performance_df = pd.DataFrame([
+        {
+            "Model": model,
+            "Accuracy": metrics["accuracy"],
+            "Precision": metrics["precision"],
+            "Recall": metrics["recall"]
+        }
+        for model, metrics in results.items()
+    ])
+    
     performance_df.to_csv("results/model_performance.csv", index=False)
     print("\nModel performance saved to results/model_performance.csv")
-
+    
 
     # Prepare data for visualizations
     # Reload raw BTC prices and news sentiment
