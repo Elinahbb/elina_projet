@@ -189,6 +189,18 @@ def main():
         f.write(f"Correlation between yesterday's sentiment and today's BTC return: {corr:.3f}\n")
 
     
+    # Additional Figure: Class distribution
+    # This figure shows the proportion of upward vs downward price movements
+
+    plt.figure(figsize=(6, 4))
+    y_test.value_counts(normalize=True).sort_index().plot(kind="bar")
+    plt.title("Distribution of Bitcoin Price Movements")
+    plt.xlabel("Price Direction (0 = Down, 1 = Up)")
+    plt.ylabel("Proportion of Days")
+    plt.tight_layout()
+    plt.savefig("results/class_distribution.png")
+    plt.close()
+
 
 if __name__ == "__main__":
     main()
