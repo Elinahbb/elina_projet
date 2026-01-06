@@ -24,59 +24,33 @@ The script trains and evaluates multiple classification models (Logistic Regress
 - A comparison against a naive baseline strategy
 - Saved evaluation results in the `results/` directory
 
-
 ## Project Structure
 
 ```text
 elina_projet/
-├── README.md              # Setup and usage instructions
-├── PROPOSAL.md            # Project proposal
-├── project_report.pdf     # Final project report (PDF)
-├── environment.yml        # Conda dependencies
-├── main.py                # Main entry point
-├── src/                   # Source code
-│   ├── data_loader.py     # Data loading & preprocessing
-│   ├── models.py          # Model training
-│   └── evaluation.py      # Evaluation metrics
+├── README.md                # Setup and usage instructions
+├── PROPOSAL.md              # Project proposal
+├── project_report.pdf       # Final project report (PDF)
+├── environment.yml          # Conda dependencies
+├── main.py                  # Main entry point
+├── src/                     # Source code
+│   ├── data_loader.py       # Data loading & preprocessing
+│   ├── models.py            # Model training
+│   └── evaluation.py        # Evaluation metrics
 ├── data/
 │   └── raw/
 │       ├── BTC.csv
 │       └── bitcoin_sentiments_21_24.csv
-├── results/               # Output figures & metrics
-│   ├── sentiment_distribution.png
-│   ├── sentiment_vs_return.png
-│   └── rolling_sentiment_return.png
-└── notebooks/             # Optional exploration notebooks
-    └── test.ipynb
-```
-
-```text
-elina_projet/
-├── README.md
-├── PROPOSAL.md
-├── project_report.pdf
-├── environment.yml
-├── main.py
-├── src/
-│   ├── data_loader.py
-│   ├── models.py
-│   └── evaluation.py
-├── data/
-│   └── raw/
-│       ├── BTC.csv
-│       └── bitcoin_sentiments_21_24.csv
-├── results/
+├── results/                 # Output figures & metrics
 │   ├── sentiment_distribution.png
 │   ├── sentiment_vs_return.png
 │   ├── rolling_sentiment_return.png
 │   ├── class_distribution.png
 │   ├── sentiment_return_correlation.txt
 │   └── model_performance.csv
-└── notebooks/
+└── notebooks/               # Optional exploration notebooks
     └── test.ipynb
 ```
-
-
 
 ## Results
 - Logistic Regression: ~0.564 accuracy
