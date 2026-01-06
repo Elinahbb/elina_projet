@@ -1,0 +1,4 @@
+Model,Accuracy
+Logistic Regression,0.563573883161512
+Random Forest,0.5463917525773195
+KNN,0.5326460481099656
