@@ -16,7 +16,9 @@ conda activate elina-projet
 ## Usage
 
 Run the main script:
+```bash
 python main.py
+```
 
 Expected output:
 The script trains and evaluates multiple classification models (Logistic Regression, Random Forest, KNN) and prints:
