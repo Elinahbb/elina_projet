@@ -15,14 +15,15 @@ conda activate elina-projet
 
 ## Usage
 
+Run the main script:
 python main.py
 
 Expected output:
-- Accuracy and classification report for Logistic Regression, Random Forest, and KNN
-- Visualizations saved in results/: 
-  - sentiment_distribution.png
-  - sentiment_vs_return.png
-  - rolling_sentiment_return.png
+The script trains and evaluates multiple classification models (Logistic Regression, Random Forest, KNN) and prints:
+- Accuracy, precision, and recall for each model
+- A comparison against a naive baseline strategy
+- Saved evaluation results in the `results/` directory
+
 
 ## Project Structure
 
@@ -54,13 +55,15 @@ elina_projet/
 - Logistic Regression: ~0.564 accuracy
 - Random Forest: ~0.546 accuracy
 - KNN: ~0.533 accuracy
+- Baseline (Always Up): ~0.512 accuracy
 - Winner: Logistic Regression
 - Correlation sentiment (T-1) vs return (T): 0.025
 - Visualizations show:
   - Distribution of previous day sentiment
   - Scatter plot: sentiment vs next-day return
   - 7-day rolling averages of sentiment and returns
+  - Distribution of Bitcoin price movements
 
 ## Requirements
 - Python 3.11
-- scikit-learn, pandas, matplotlib, seaborn
+- scikit-learn, pandas, numpy, matplotlib, seaborn

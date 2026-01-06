@@ -21,7 +21,7 @@ This project is motivated by the growing importance of sentiment analysis in fin
    - Random Forest  
    - K-Nearest Neighbors (KNN)  
 4. Evaluate models using accuracy and classification metrics.  
-5. Generate visualizations: sentiment distribution, sentiment vs return scatter plot, and 7-day rolling averages.  
+5. Generate visualizations: sentiment distribution, sentiment vs return scatter plot, 7-day rolling averages, and class distribution. 
 
 ## Technologies:
 Python 3.11+, pandas, scikit-learn, matplotlib, seaborn, JupyterLab.
