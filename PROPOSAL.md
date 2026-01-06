@@ -1,5 +1,5 @@
 ## Project Proposal:
-Bitcoin Price Direction Prediction Using News Sentiment..
+Bitcoin Price Direction Prediction Using News Sentiment
 
 ## Project Category:
 Financial / Machine Learning / NLP
