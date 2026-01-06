@@ -50,6 +50,33 @@ elina_projet/
     └── test.ipynb
 ```
 
+```text
+elina_projet/
+├── README.md
+├── PROPOSAL.md
+├── project_report.pdf
+├── environment.yml
+├── main.py
+├── src/
+│   ├── data_loader.py
+│   ├── models.py
+│   └── evaluation.py
+├── data/
+│   └── raw/
+│       ├── BTC.csv
+│       └── bitcoin_sentiments_21_24.csv
+├── results/
+│   ├── sentiment_distribution.png
+│   ├── sentiment_vs_return.png
+│   ├── rolling_sentiment_return.png
+│   ├── class_distribution.png
+│   ├── sentiment_return_correlation.txt
+│   └── model_performance.csv
+└── notebooks/
+    └── test.ipynb
+```
+
+
 
 ## Results
 - Logistic Regression: ~0.564 accuracy
