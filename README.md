@@ -36,7 +36,7 @@ Expected output:
 The script trains and evaluates multiple classification models (Logistic Regression, Random Forest, KNN) and prints:
 - Accuracy, precision, and recall for each model
 - A comparison against a naive baseline strategy
-- Saved evaluation results in the `results/` directory
+- Saved evaluation results in the `results` directory
 
 ## Project Structure
 
