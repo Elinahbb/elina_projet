@@ -19,7 +19,9 @@ On low-memory machines (like nuvolos), if `conda env create -f environment.yml` 
 
 ```bash
 cd elina_projet
+
 conda create -n elina-projet python=3.11 pandas numpy scikit-learn matplotlib seaborn
+
 conda activate elina-projet
 ```
 
