@@ -54,6 +54,8 @@ elina_projet/
     └── test.ipynb
 ```
 
+Note: Jupyter checkpoint files are excluded from version control using a .gitignore file to keep the repository clean.
+
 ## Results
 - Logistic Regression: ~0.564 accuracy
 - Random Forest: ~0.546 accuracy
