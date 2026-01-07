@@ -18,7 +18,7 @@ conda activate elina-projet
 On low-memory machines (like nuvolos), if `conda env create -f environment.yml` fails, you can use:
 
 ```bash
-elina_projet
+cd elina_projet
 conda create -n elina-projet python=3.11 pandas numpy scikit-learn matplotlib seaborn
 conda activate elina-projet
 ```
